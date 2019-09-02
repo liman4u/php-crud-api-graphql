@@ -84,6 +84,16 @@ mutation {
   }
 }
 
+Delete user :
+mutation {
+  deleteUser(
+    id: 1 
+  ) {
+    name
+    email
+  }
+}
+
 Create article:
 mutation {
   createArticle(
