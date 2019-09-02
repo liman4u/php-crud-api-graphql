@@ -1,15 +1,13 @@
 # PHP CRUD API with QraphQL
-- A Simple crud api using GraphQL with lighthouse library and GraphQL playground
+- A Simple crud api using GraphQL with lighthouse library and GraphQL playground for a blog post with users and articles
 
 # Technology
 
 - Laravel Framework v5.8
 
-- Docker v19.03.1
-
 - PHP v7.1.3
 
-- LightHouse v3.1 for building the graphql server
+- LightHouse v3.1 for building the graphql server (https://github.com/nuwave/lighthouse)
 
 - Data was persisted with Sqlite
         
@@ -24,15 +22,7 @@
 - PhpUnit 7.5 was used for testing , i am more familiar with this than others like Codeception and Behat
 
 
-# To run using docker [Recommended]
-
-- Git clone this repository
-- Change directory into root of cloned folder
-- Rename `.env.example`  to `.env` (This contains the app configs and databases settings )
-- Enter `sh ./start.sh` to start the 3 docker containers ( php , nginx and mysql )
-- Open http://localhost:8000 or http://[local ipaddress]:8000 to use the graphql playground
-
-# To run locally without docker
+# To run locally
 
 - Git clone this repository
 - Change directory into root of cloned folder
@@ -43,8 +33,72 @@
 - Enter `php artisan migrate` to run migration 
 - Enter `php artisan db:seed` to run seed some some records 
 - Run tests with `composer test`
-- Open ttp://localhost:8000 or http://127.0.0.1:8000 to view app
- 
+- Open ttp://localhost:8000 or http://127.0.0.1:8000 to access the playground
+
+# Queries to run - CRUD operations on users and articles
+```bash
+
+Get all users:
+ {
+  users {
+    id
+    email
+    name
+  }
+}
+
+Get user with articles :
+{
+  user(id:1) {
+    articles {
+      id
+      title
+    }
+  }
+}
+
+Create user :
+mutation {
+  createUser(
+    name:"John Doe"
+    email:"john.doe@example.com"
+    password: "secret"
+  ) {
+    id
+    name
+    email
+  }
+}
+
+Update user :
+mutation {
+  updateUser(
+    id: 1  
+    name:"John Doe"
+    email:"john1.doe1@example.com"
+    password: "secret"
+  ) {
+    id
+    name
+    email
+  }
+}
+
+Create article:
+mutation {
+  createArticle(
+    user_id: 1  
+    title:"Building a GraphQL Server with Laravel"
+    content:"In case you're not currently familiar with it, GraphQL is a query language used to interact with your API..."
+  ) {
+    id
+    author {
+      id
+      email
+    }
+  }
+}
+```
 
 # Data Migration
 
