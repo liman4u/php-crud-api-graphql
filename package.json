@@ -23,6 +23,6 @@
         "vue": "^2.5.17"
     },
     "dependencies": {
-        "graphql-playground-react": "^1.7.20"
+        "graphql-playground-react": "^1.7.28"
     }
 }
